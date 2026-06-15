@@ -7,14 +7,14 @@ import api from '../api/client';
 
 function JobCard({ job, isEmployer }) {
   return (
-    <Link to={`/jobs/${job._id}`} className="card p-5 hover:shadow-md transition-all group block">
+    <Link to={`/jobs/${job._id}`} className="card p-5 hover:-translate-y-0.5 transition-all group block">
       <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center flex-shrink-0">
-          <span className="font-bold text-brand-700 text-sm">{(job.company || job.employer?.company || '?').charAt(0).toUpperCase()}</span>
+        <div className="w-11 h-11 rounded-lg bg-slate-950 flex items-center justify-center flex-shrink-0">
+          <span className="font-black text-cyan-300 text-sm">{(job.company || job.employer?.company || '?').charAt(0).toUpperCase()}</span>
         </div>
         <JobTypeBadge type={job.type} />
       </div>
-      <h3 className="font-semibold text-slate-900 mb-1 group-hover:text-brand-700 transition-colors">{job.title}</h3>
+      <h3 className="font-black text-slate-950 mb-1 group-hover:text-cyan-700 transition-colors">{job.title}</h3>
       <p className="text-sm text-slate-500 mb-3">{job.company || job.employer?.company}</p>
       <div className="flex items-center gap-3 text-xs text-slate-400 mb-4">
         <span className="flex items-center gap-1"><MapPin size={12} />{job.location}</span>
@@ -192,11 +192,11 @@ export default function Jobs() {
 
       {/* Tabs for candidates */}
       {!isEmployer && (
-        <div className="flex gap-1 bg-slate-100 p-1 rounded-xl w-fit">
+        <div className="flex gap-1 bg-white p-1 rounded-lg w-fit border border-slate-200">
           {['all', 'recommended'].map(t => (
             <button key={t} onClick={() => setTab(t)}
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all capitalize ${tab === t ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500 hover:text-slate-700'}`}>
-              {t === 'recommended' ? '⭐ Recommended' : 'All Jobs'}
+              className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all capitalize ${tab === t ? 'bg-slate-950 text-white' : 'text-slate-500 hover:text-slate-800'}`}>
+              {t === 'recommended' ? 'Recommended' : 'All Jobs'}
             </button>
           ))}
         </div>

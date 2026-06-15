@@ -14,7 +14,7 @@ export function Alert({ type = 'info', message, onClose }) {
     info: <Info size={16} className="text-blue-600 flex-shrink-0" />,
   };
   return (
-    <div className={`flex items-start gap-2.5 px-4 py-3 rounded-xl border text-sm font-medium animate-slide-up ${styles[type]}`}>
+    <div className={`flex items-start gap-2.5 px-4 py-3 rounded-lg border text-sm font-medium animate-slide-up ${styles[type]}`}>
       {icons[type]}
       <span className="flex-1">{message}</span>
       {onClose && (
@@ -30,7 +30,7 @@ export function Alert({ type = 'info', message, onClose }) {
 export function Spinner({ size = 'md', className = '' }) {
   const s = { sm: 'w-4 h-4', md: 'w-6 h-6', lg: 'w-10 h-10' };
   return (
-    <div className={`${s[size]} border-2 border-brand-500 border-t-transparent rounded-full animate-spin ${className}`} />
+    <div className={`${s[size]} border-2 border-cyan-600 border-t-transparent rounded-full animate-spin ${className}`} />
   );
 }
 
@@ -63,10 +63,10 @@ export function JobTypeBadge({ type }) {
 export function EmptyState({ icon: Icon, title, description, action }) {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
-      <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
-        <Icon size={28} className="text-slate-400" />
+      <div className="w-16 h-16 rounded-lg bg-slate-950 flex items-center justify-center mb-4">
+        <Icon size={28} className="text-cyan-300" />
       </div>
-      <h3 className="text-lg font-semibold text-slate-800 mb-1">{title}</h3>
+      <h3 className="text-lg font-black text-slate-950 mb-1">{title}</h3>
       {description && <p className="text-sm text-slate-500 max-w-xs mb-5">{description}</p>}
       {action}
     </div>
@@ -79,10 +79,10 @@ export function Modal({ open, onClose, title, children, maxWidth = 'max-w-lg' })
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={onClose} />
-      <div className={`relative bg-white rounded-2xl shadow-2xl w-full ${maxWidth} animate-slide-up max-h-[90vh] flex flex-col`}>
+      <div className={`relative bg-white rounded-lg shadow-2xl w-full ${maxWidth} animate-slide-up max-h-[90vh] flex flex-col`}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-          <h2 className="text-lg font-bold text-slate-900">{title}</h2>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+          <h2 className="text-lg font-black text-slate-950">{title}</h2>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-stone-100 transition-colors">
             <X size={18} />
           </button>
         </div>
@@ -95,7 +95,7 @@ export function Modal({ open, onClose, title, children, maxWidth = 'max-w-lg' })
 // Skill tag
 export function SkillTag({ skill }) {
   return (
-    <span className="inline-flex items-center px-2.5 py-0.5 bg-brand-50 text-brand-700 text-xs font-medium rounded-lg border border-brand-100">
+    <span className="inline-flex items-center px-2.5 py-1 bg-cyan-50 text-cyan-800 text-xs font-bold rounded-md border border-cyan-100">
       {skill}
     </span>
   );

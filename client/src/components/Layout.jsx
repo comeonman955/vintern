@@ -36,27 +36,30 @@ export default function Layout() {
   const navItems = user?.role === 'employer' ? employerNav : candidateNav;
 
   return (
-    <div className="flex h-screen bg-slate-50 overflow-hidden">
-      {sidebarOpen && <div className="fixed inset-0 bg-black/20 z-20 lg:hidden" onClick={() => setSidebarOpen(false)} />}
+    <div className="flex h-screen bg-stone-100 overflow-hidden">
+      {sidebarOpen && <div className="fixed inset-0 bg-slate-950/55 z-20 lg:hidden" onClick={() => setSidebarOpen(false)} />}
 
-      <aside className={`fixed lg:static inset-y-0 left-0 z-30 w-64 bg-white border-r border-slate-100 flex flex-col transform transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="px-6 py-5 border-b border-slate-100">
+      <aside className={`fixed lg:static inset-y-0 left-0 z-30 w-72 bg-slate-950 text-slate-100 flex flex-col transform transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="px-5 py-5 border-b border-white/10">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-white" fill="white" />
+            <div className="w-9 h-9 rounded-lg bg-cyan-400 flex items-center justify-center shadow-[0_0_30px_rgba(34,211,238,0.35)]">
+              <Zap className="w-4 h-4 text-slate-950" fill="currentColor" />
             </div>
-            <span className="font-bold text-lg text-slate-900">Vintern</span>
+            <div>
+              <span className="block font-black text-lg text-white tracking-normal">Vintern</span>
+              <span className="block text-[11px] uppercase tracking-[0.22em] text-cyan-200">intern ops</span>
+            </div>
           </div>
         </div>
 
-        <div className="px-4 py-4 border-b border-slate-100">
-          <div className="flex items-center gap-3 px-2 py-2 rounded-xl bg-slate-50">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+        <div className="px-4 py-4 border-b border-white/10">
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.07] border border-white/10">
+            <div className="w-10 h-10 rounded-lg bg-lime-300 flex items-center justify-center text-slate-950 font-black text-sm flex-shrink-0">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-800 truncate">{user?.name}</p>
-              <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${user?.role === 'employer' ? 'bg-violet-100 text-violet-700' : 'bg-emerald-100 text-emerald-700'}`}>
+              <p className="text-sm font-semibold text-white truncate">{user?.name}</p>
+              <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${user?.role === 'employer' ? 'bg-fuchsia-300 text-slate-950' : 'bg-emerald-300 text-slate-950'}`}>
                 {user?.role}
               </span>
             </div>
@@ -67,44 +70,46 @@ export default function Layout() {
           {navItems.map(({ to, label, icon: Icon, highlight }) => (
             <NavLink key={to} to={to} onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 group
+                `flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold text-sm transition-all duration-150 group
                 ${isActive
-                  ? highlight ? 'bg-gradient-to-r from-brand-500 to-violet-600 text-white shadow-sm' : 'bg-brand-50 text-brand-700 shadow-sm'
-                  : highlight ? 'text-brand-600 hover:bg-brand-50' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                  ? highlight ? 'bg-cyan-300 text-slate-950 shadow-[0_0_24px_rgba(34,211,238,0.25)]' : 'bg-white text-slate-950'
+                  : highlight ? 'text-cyan-200 hover:bg-white/10 hover:text-cyan-100' : 'text-slate-300 hover:bg-white/10 hover:text-white'
                 }`}>
               {({ isActive }) => (
                 <>
                   <Icon size={18} className="flex-shrink-0" />
                   <span className="flex-1">{label}</span>
                   {highlight && !isActive && (
-                    <span className="text-[10px] bg-brand-500 text-white px-1.5 py-0.5 rounded-full font-bold">AI</span>
+                    <span className="text-[10px] bg-cyan-300 text-slate-950 px-1.5 py-0.5 rounded font-black">AI</span>
                   )}
-                  {isActive && !highlight && <ChevronRight size={14} className="text-brand-400" />}
+                  {isActive && !highlight && <ChevronRight size={14} className="text-slate-500" />}
                 </>
               )}
             </NavLink>
           ))}
         </nav>
 
-        <div className="px-3 py-4 border-t border-slate-100">
+        <div className="px-3 py-4 border-t border-white/10">
           <button onClick={() => { logout(); navigate('/'); }}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all">
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-red-500/15 hover:text-red-200 transition-all">
             <LogOut size={18} />Sign out
           </button>
         </div>
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <header className="h-14 bg-white border-b border-slate-100 flex items-center justify-between px-4 lg:px-6 flex-shrink-0">
-          <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-2 rounded-lg hover:bg-slate-100">
+        <header className="h-16 bg-stone-100/90 border-b border-slate-200 flex items-center justify-between px-4 lg:px-7 flex-shrink-0 backdrop-blur">
+          <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-2 rounded-lg hover:bg-white border border-slate-200">
             <Menu size={20} />
           </button>
-          <div className="hidden lg:block" />
+          <div className="hidden lg:block">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">workspace</p>
+          </div>
           <div className="relative">
-            <button onClick={() => setShowNotifs(!showNotifs)} className="relative p-2 rounded-xl hover:bg-slate-100 transition-colors">
-              <Bell size={20} className="text-slate-600" />
+            <button onClick={() => setShowNotifs(!showNotifs)} className="relative p-2.5 rounded-lg bg-white border border-slate-200 hover:border-cyan-400 transition-colors">
+              <Bell size={19} className="text-slate-700" />
               {unread > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 bg-lime-300 text-slate-950 text-[10px] font-black rounded-full flex items-center justify-center">
                   {unread > 9 ? '9+' : unread}
                 </span>
               )}
